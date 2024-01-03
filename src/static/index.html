@@ -111,62 +111,29 @@
                 simulateKeyRelease(keyCode);
             }
 
-            upButton.addEventListener('mousedown', function() {
-                startInterval(38); // 38 is the keyCode for the up arrow key
-            });
+            function handleTouchEvent(button, keyCode) {
+                button.addEventListener('touchstart', function(event) {
+                    event.preventDefault();
+                    startInterval(keyCode);
+                });
 
-            upButton.addEventListener('mouseup', function() {
-                stopInterval(38);
-            });
+                button.addEventListener('touchend', function(event) {
+                    event.preventDefault();
+                    stopInterval(keyCode);
+                });
 
-            leftButton.addEventListener('mousedown', function() {
-                startInterval(37); // 37 is the keyCode for the left arrow key
-            });
+                button.addEventListener('touchcancel', function(event) {
+                    event.preventDefault();
+                    stopInterval(keyCode);
+                });
+            }
 
-            leftButton.addEventListener('mouseup', function() {
-                stopInterval(37);
-            });
-
-            downButton.addEventListener('mousedown', function() {
-                startInterval(40); // 40 is the keyCode for the down arrow key
-            });
-
-            downButton.addEventListener('mouseup', function() {
-                stopInterval(40);
-            });
-
-            rightButton.addEventListener('mousedown', function() {
-                startInterval(39); // 39 is the keyCode for the right arrow key
-            });
-
-            rightButton.addEventListener('mouseup', function() {
-                stopInterval(39);
-            });
-
-            spaceButton.addEventListener('mousedown', function() {
-                simulateKeyPress(32); // 32 is the keyCode for the space key
-            });
-
-            spaceButton.addEventListener('mouseup', function() {
-                simulateKeyRelease(32);
-            });
-
-            // Stop the interval when the mouse leaves the button
-            upButton.addEventListener('mouseleave', function() {
-                stopInterval(38);
-            });
-
-            leftButton.addEventListener('mouseleave', function() {
-                stopInterval(37);
-            });
-
-            downButton.addEventListener('mouseleave', function() {
-                stopInterval(40);
-            });
-
-            rightButton.addEventListener('mouseleave', function() {
-                stopInterval(39);
-            });
+            // Handle touch events for each button
+            handleTouchEvent(upButton, 38); // 38 is the keyCode for the up arrow key
+            handleTouchEvent(leftButton, 37); // 37 is the keyCode for the left arrow key
+            handleTouchEvent(downButton, 40); // 40 is the keyCode for the down arrow key
+            handleTouchEvent(rightButton, 39); // 39 is the keyCode for the right arrow key
+            handleTouchEvent(spaceButton, 32); // 32 is the keyCode for the space key
         </script>
     </center>
 </body>
