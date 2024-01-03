@@ -9,16 +9,50 @@
         body {
             background-color: black;
             color: white;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        #canvas {
+            display: block;
+        }
+        
+        #overlay {
+            margin-left: 10%;
+            width: 80%;
+            display: flex;
+            position: fixed;
+            bottom: 10px;
+            align-self: center;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+        
+        button {
+            font-size: 16px;
+            margin: 5px;
+            padding: 10px;
         }
     </style>
 </head>
 
 <body>
-
     <center>
-
-        <canvas id="canvas" oncontextmenu "event.preventDefault()"></canvas>
-        <script type 'text/javascript'>
+        <canvas id="canvas"></canvas>
+        <div id="overlay">
+            <div id="left">
+                <button id="spaceButton">Space</button>
+            </div>
+            <div id="right">
+                <button id="upButton">&uarr;</button>
+                <br>
+                <button id="leftButton">&larr;</button>
+                <button id="downButton">&darr;</button>
+                <button id="rightButton">&rarr;</button>
+            </div>
+        </div>
+        <script type='text/javascript'>
             var Module = {
                 canvas: (function() {
                     return document.getElementById('canvas');
@@ -26,9 +60,115 @@
             };
         </script>
         <script src="index.js"></script>
+        <script>
+            // Function to simulate key press
+            function simulateKeyPress(keyCode) {
+                var eventObj = document.createEventObject ?
+                    document.createEventObject() : document.createEvent("Events");
 
+                if (eventObj.initEvent) {
+                    eventObj.initEvent("keydown", true, true);
+                }
+
+                eventObj.keyCode = keyCode;
+                eventObj.which = keyCode;
+
+                document.dispatchEvent ? document.dispatchEvent(eventObj) : document.fireEvent("onkeydown", eventObj);
+            }
+
+            // Function to simulate key release
+            function simulateKeyRelease(keyCode) {
+                var eventObj = document.createEventObject ?
+                    document.createEventObject() : document.createEvent("Events");
+
+                if (eventObj.initEvent) {
+                    eventObj.initEvent("keyup", true, true);
+                }
+
+                eventObj.keyCode = keyCode;
+                eventObj.which = keyCode;
+
+                document.dispatchEvent ? document.dispatchEvent(eventObj) : document.fireEvent("onkeyup", eventObj);
+            }
+
+            // Add event listeners to the arrow buttons
+            var upButton = document.getElementById('upButton');
+            var leftButton = document.getElementById('leftButton');
+            var downButton = document.getElementById('downButton');
+            var rightButton = document.getElementById('rightButton');
+            var spaceButton = document.getElementById('spaceButton');
+
+            var intervalId;
+
+            function startInterval(keyCode) {
+                intervalId = setInterval(function() {
+                    simulateKeyPress(keyCode);
+                }, 100); // Adjust the interval time as needed
+            }
+
+            function stopInterval(keyCode) {
+                clearInterval(intervalId);
+                simulateKeyRelease(keyCode);
+            }
+
+            upButton.addEventListener('mousedown', function() {
+                startInterval(38); // 38 is the keyCode for the up arrow key
+            });
+
+            upButton.addEventListener('mouseup', function() {
+                stopInterval(38);
+            });
+
+            leftButton.addEventListener('mousedown', function() {
+                startInterval(37); // 37 is the keyCode for the left arrow key
+            });
+
+            leftButton.addEventListener('mouseup', function() {
+                stopInterval(37);
+            });
+
+            downButton.addEventListener('mousedown', function() {
+                startInterval(40); // 40 is the keyCode for the down arrow key
+            });
+
+            downButton.addEventListener('mouseup', function() {
+                stopInterval(40);
+            });
+
+            rightButton.addEventListener('mousedown', function() {
+                startInterval(39); // 39 is the keyCode for the right arrow key
+            });
+
+            rightButton.addEventListener('mouseup', function() {
+                stopInterval(39);
+            });
+
+            spaceButton.addEventListener('mousedown', function() {
+                simulateKeyPress(32); // 32 is the keyCode for the space key
+            });
+
+            spaceButton.addEventListener('mouseup', function() {
+                simulateKeyRelease(32);
+            });
+
+            // Stop the interval when the mouse leaves the button
+            upButton.addEventListener('mouseleave', function() {
+                stopInterval(38);
+            });
+
+            leftButton.addEventListener('mouseleave', function() {
+                stopInterval(37);
+            });
+
+            downButton.addEventListener('mouseleave', function() {
+                stopInterval(40);
+            });
+
+            rightButton.addEventListener('mouseleave', function() {
+                stopInterval(39);
+            });
+        </script>
     </center>
-
 </body>
 
 </html>
