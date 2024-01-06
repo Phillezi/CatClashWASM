@@ -1,6 +1,6 @@
 <!-- Author: Philip Zingmark, all the contributors to the original project are on the github of the original project            -->
 <!-- A Emscripten port of our first year project https://github.com/Phillezi/CatClash (Its a SDL2 multiplayer game made in c)   -->
-<!-- Not everything is ported, ie multiplayer capabilities and a bunch of bugs are present                                      -->
+<!-- Not everything is ported, for example multiplayer capabilities and a bunch of bugs are present                             -->
 <!DOCTYPE html>
 <html>
 
@@ -64,7 +64,6 @@
         </script>
         <script src="index.js"></script>
         <script>
-            // Function to simulate key press
             function simulateKeyPress(keyCode) {
                 var eventObj = document.createEventObject ?
                     document.createEventObject() : document.createEvent("Events");
@@ -79,7 +78,6 @@
                 document.dispatchEvent ? document.dispatchEvent(eventObj) : document.fireEvent("onkeydown", eventObj);
             }
 
-            // Function to simulate key release
             function simulateKeyRelease(keyCode) {
                 var eventObj = document.createEventObject ?
                     document.createEventObject() : document.createEvent("Events");
@@ -94,7 +92,6 @@
                 document.dispatchEvent ? document.dispatchEvent(eventObj) : document.fireEvent("onkeyup", eventObj);
             }
 
-            // Add event listeners to the arrow buttons
             var upButton = document.getElementById('upButton');
             var leftButton = document.getElementById('leftButton');
             var downButton = document.getElementById('downButton');
@@ -106,7 +103,7 @@
             function startInterval(keyCode) {
                 intervalId = setInterval(function() {
                     simulateKeyPress(keyCode);
-                }, 100); // Adjust the interval time as needed
+                }, 100);
             }
 
             function stopInterval(keyCode) {
@@ -131,12 +128,11 @@
                 });
             }
 
-            // Handle touch events for each button
-            handleTouchEvent(upButton, 38); // 38 is the keyCode for the up arrow key
-            handleTouchEvent(leftButton, 37); // 37 is the keyCode for the left arrow key
-            handleTouchEvent(downButton, 40); // 40 is the keyCode for the down arrow key
-            handleTouchEvent(rightButton, 39); // 39 is the keyCode for the right arrow key
-            handleTouchEvent(spaceButton, 32); // 32 is the keyCode for the space key
+            handleTouchEvent(upButton, 38); // up arrow key
+            handleTouchEvent(leftButton, 37); // left arrow key
+            handleTouchEvent(downButton, 40); // down arrow key
+            handleTouchEvent(rightButton, 39); // right arrow key
+            handleTouchEvent(spaceButton, 32); // space key
         </script>
     </center>
 </body>
