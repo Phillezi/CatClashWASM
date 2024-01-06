@@ -2,6 +2,8 @@
 
 Welcome to CatClashWASM, a web game that is a port of the original CatClash, which was initially developed as a group project using C and SDL2. This version of the game has been ported to WebAssembly (WASM) using Emscripten, allowing you to enjoy the game right in your web browser.
 
+Try the game [here](https://catclash.vm-app.cloud.cbh.kth.se/).
+
 ## Requirements
 Node.js and npm.
 
