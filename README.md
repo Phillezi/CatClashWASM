@@ -38,7 +38,7 @@ To run it follow these simple steps:
 
 ## Gameplay
 
-CatClashWASM retains the exciting gameplay of the original CatClash with some limitations (No Multiplayer and some bugs). Control your cat and engage in thrilling battles with other cats. Enjoy the vibrant graphics, lively animations, and immersive sound effects—all within the convenience of your web browser.
+CatClashWASM retains the exciting gameplay of the original CatClash with some limitations (No Multiplayer and some bugs).S
 
 
 
